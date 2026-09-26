@@ -1,16 +1,16 @@
 {
   "repository": "https://github.com/uptomic/uptomic-hq",
-  "commit": "8775345848b872fad6a650927f1e1f4567c35deb",
-  "buildDigest": "4bd22066ea44d1e042faccc1a448c7208f67f18e00ba0f8bf716933e0edc86c1",
+  "commit": "5047da797041701c120332831a57a38f1230d6bd",
+  "buildDigest": "bdcdc63ea95fd751a0f1e90ed363098a0ded71f096864108c2e72f4585f833ff",
   "source": "skills/uptomic-gbrain",
   "files": {
-    "SKILL.md": "ec841a759fb884e28cc5440f57422b01d1c7af2c41e17bd680a69280335c713c",
+    "SKILL.md": "1b0578f577046a50e9c9b69f4a89c7c8f299f49255bb75cda6f618bb5697406d",
     "agents/openai.yaml": "c2b1b72a2ff559fb50bb1f32cbe20844928c32bd50651d3195837aad165cf86f",
     "references/connection.md": "b5a845d2b9abcff2018bb39ab26834db04c779966d0e60b0047c35fb61067a1e",
     "references/projects.md": "5dcb4d7ae35a14946efc1ed939cca76347edab1e68de88f55e75e8392f06b37c",
     "references/repositories.json": "7c6f43be6abcc829838ba43e84109409f9d1b6441b50320983683a2a03084678",
     "references/usage.md": "cc14681b24c8c9bbfb9d0d79bf925d0df319dab8f3ec438e5c6ccea6f536b7b5",
-    "scripts/brain.ts": "54783a6ff264d67a4f84f068209d032148625509c6ac9953da3f484ab2ae46e7"
+    "scripts/brain.ts": "e584a029d487c36338045c10fb616f6c474a3fd641a3a9669af8d1424146661b"
   },
   "updates": "Change and review the HQ source, then explicitly refresh this snapshot. Credentials are never included."
 }

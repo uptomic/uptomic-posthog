@@ -71,6 +71,23 @@ OpenRouter embeddings are configured. Use `search`/`recall`; synthesis, query
 expansion, autonomous LLM reorganization, and new connectors need their own scope
 and configuration. No automatic transcript capture or personal-agent bootstrap.
 
+## Prime a project
+
+When asked to teach the brain about a repository, use the HQ-owned project primer
+instead of copying the repository or improvising an ingestion crawler. From the HQ
+checkout, run `bun run brain:prime --project /absolute/project --output
+/tmp/<project>-overview.md`. Read only the immutable approved sources in its manifest,
+replace every placeholder with a concise pointer-style overview, and review the
+complete draft. Keep implementation details at their owning documents, name
+limitations, include no secrets or personal data, and cite the inspected commit.
+
+Apply only the reviewed page with `bun run brain:prime --project /absolute/project
+--apply --page /tmp/<project>-overview.md`. The command validates provenance, uses
+revision protection, and verifies readback. Initial priming and automatic extraction
+are separate: the deployed extractor targets conversation-shaped material and is not
+a repository summarizer. Do not enable transcript capture, source connectors, or
+background LLM extraction as a side effect of priming.
+
 This skill adapts upstream's [existing-agent memory workflow](https://github.com/garrytan/gbrain/blob/8453d003e01bf3be5c272f6574bd8d858f3ad6ba/docs/tutorials/connect-coding-agent.md)
 to Uptomic's shared company brain. Connection and record references describe the
 deployed version's limits; upstream feature availability is not proof of activation.

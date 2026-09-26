@@ -19,6 +19,7 @@ const operations = new Set([
   'context_pack',
   'get_write_request',
   'list_write_requests',
+  'request_tools',
 ]);
 type JsonObject = Record<string, unknown>;
 type Request = (url: string, init: RequestInit) => Promise<Response>;
@@ -58,7 +59,7 @@ export function parseCredentials(text: string): Credentials {
   return value as unknown as Credentials;
 }
 
-async function loadCredentials(): Promise<Credentials> {
+export async function loadCredentials(): Promise<Credentials> {
   const file = process.env.GBRAIN_CREDENTIALS_FILE;
   if (file) {
     const stat = statSync(file);
