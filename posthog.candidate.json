@@ -1,20 +1,20 @@
 {
-  "builtAt": "2026-09-28T02:55:15.313Z",
+  "builtAt": "2026-09-29T02:47:47.558Z",
   "clickhouseBuild": {
     "baseImage": "docker.io/clickhouse/clickhouse-server@sha256:95f7cbf466dba734947775eb74808a13a3558e4398666ea6b1d992af85b9740d",
     "baseVersion": "26.6.2.158",
-    "fingerprintSha256": "7d42f6098a548671c82c9ac38e7d7fcca60189b57d87fcc5a20bd19f2d2e8d21"
+    "fingerprintSha256": "377bbe48674d285218ef5e1ea7ee18c224443c56f9eab5cb56849fb019da4469"
   },
   "images": {
-    "clickhouse": "ghcr.io/uptomic/posthog-railway/clickhouse@sha256:5a498e3b5b690f16b522ce2d6357070d4ca251739f014113652d6e11392b902a",
-    "mcp": "ghcr.io/uptomic/posthog-railway/mcp@sha256:28a810d50aca67e8308915864b5e943b665eff3eeb07003a163dc45698be320c",
-    "node": "ghcr.io/uptomic/posthog-railway/node@sha256:49eddc02566c6e3639d451026a6d1a33774c470c41ee54a93c587e5b8425b1f9"
+    "clickhouse": "ghcr.io/uptomic/posthog-railway/clickhouse@sha256:5fc2a204cec8484eace176823457ba4091f93313c08205fca150af79fc248f0b",
+    "mcp": "ghcr.io/uptomic/posthog-railway/mcp@sha256:9f45b0cfab233ed57931c533b014eb8b7ff4c9f05d13e35909341ee5df88e762",
+    "node": "ghcr.io/uptomic/posthog-railway/node@sha256:31eb6a4f055aeec386cbd32c50afb1b7038d91c044edf50049ec7a682b54ce4e"
   },
   "nodeOverlay": {
-    "baseImage": "ghcr.io/posthog/posthog-node@sha256:bd425198ceb4518211ecfda839f391f8aaa2b53095b96d77589514f33b523b2f",
-    "baseRevision": "fdaa10533e7433b6ac8a205e8c739f2c263883ec",
-    "fingerprintSha256": "b0d5934ad55e1ee158bc248be28ae4f94cfedda480ab7cb2e3a2802f2de3469b"
+    "baseImage": "ghcr.io/posthog/posthog-node@sha256:5afcd0ab74ed15229ce7ed37cc005e741706f04d0cc555754ea570a2fa1ded3b",
+    "baseRevision": "4a70c72f47a9d93226e5d9d8fc0df2dba1cc34fa",
+    "fingerprintSha256": "ea39c697cc0d6da124de171e753e62c11ebc293fa35e4a720ed08106a1245c36"
   },
   "schemaVersion": 1,
-  "upstreamCommit": "ed038b0fb49894f861085f8012bab09e5b96df38"
+  "upstreamCommit": "c006603dba8097120e58468a0c036f11a1eba418"
 }
