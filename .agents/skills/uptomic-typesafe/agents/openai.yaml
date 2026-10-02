@@ -1,6 +1,6 @@
 interface:
   display_name: "Uptomic TypeSafe"
   short_description: "Use Jev typed AI judgments through OpenRouter"
-  default_prompt: "Use $uptomic-typesafe to design or migrate the TypeSafe Jev judgment through OpenRouter with this environment key."
+  default_prompt: "Use $uptomic-typesafe to design or migrate the TypeSafe Jev judgment through OpenRouter with this environment's dedicated TypeSafe key."
 policy:
   allow_implicit_invocation: true

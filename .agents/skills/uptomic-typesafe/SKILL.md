@@ -20,11 +20,16 @@ Decided 2026-10-02. New and changed TypeSafe/Jev usage, in application code and 
 coding sessions by Claude, Codex or people, goes through OpenRouter:
 
 - Base URL `https://openrouter.ai/api` (the SDK appends `/v1/systemone`).
-- Authenticate with the environment's own `OPENROUTER_API_KEY`, the same key the
-  project already uses for OpenRouter. Do not create, request or copy a direct
-  typesafe.ai key, and do not borrow another project's or environment's key.
+- Authenticate with the environment's dedicated `OPENROUTER_TYPESAFE_API_KEY`
+  (OpenRouter key `<project>-<env>-typesafe`), used only for TypeSafe. Each project
+  and environment has its own; never share one across environments or projects,
+  and never fall back to the general `OPENROUTER_API_KEY` or another key, so a
+  runaway Jev workload stays visible on its own key. Do not create, request or
+  copy a direct typesafe.ai key.
 - Spend is billed to the Uptomic OpenRouter account and attributed to that key and its
   workspace (Development for local/dev/test/staging, Production or Internal for prod).
+  A project or environment without the key does not use TypeSafe until it is
+  provisioned; ask rather than borrowing a key.
 
 Existing direct `api.typesafe.ai` keys are grandfathered only for code that has not
 been migrated yet. Do not extend a direct integration; migrate it when you touch it

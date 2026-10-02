@@ -13,7 +13,7 @@ The official SDKs are `@typesafe-ai/sdk` (JavaScript/TypeScript) and `typesafe-s
 import { TypeSafeClient } from '@typesafe-ai/sdk';
 
 const client = new TypeSafeClient({
-  apiKey: process.env.OPENROUTER_API_KEY,
+  apiKey: process.env.OPENROUTER_TYPESAFE_API_KEY,
   baseURL: 'https://openrouter.ai/api',
 });
 ```
@@ -22,13 +22,17 @@ const client = new TypeSafeClient({
 import os
 from typesafe_sdk import TypeSafeClient
 
-client = TypeSafeClient(api_key=os.environ["OPENROUTER_API_KEY"], base_url="https://openrouter.ai/api")
+client = TypeSafeClient(
+    api_key=os.environ["OPENROUTER_TYPESAFE_API_KEY"], base_url="https://openrouter.ai/api"
+)
 ```
 
-Both SDKs also read `TYPESAFE_BASE_URL` and `TYPESAFE_API_KEY`. Prefer passing the
-project's existing `OPENROUTER_API_KEY` explicitly so one secret serves both uses
-and key rotation cannot leave a stale copy behind. Follow the project's env schema
-and secret-naming rules when adding configuration.
+Both SDKs also read `TYPESAFE_BASE_URL` and `TYPESAFE_API_KEY`. Pass the base URL
+and `OPENROUTER_TYPESAFE_API_KEY` explicitly instead, so a leftover direct-key
+variable cannot redirect calls. The dedicated key (one per project and environment,
+created 2026-10-02 in Infisical beside the general key) keeps TypeSafe spend
+separate from other OpenRouter usage; do not substitute `OPENROUTER_API_KEY` when it
+is missing. Follow the project's env schema and secret-naming rules.
 
 Without an SDK, `POST https://openrouter.ai/api/v1/systemone` with
 `Authorization: Bearer <OpenRouter key>` and a JSON body of `model`, `state` and
@@ -67,7 +71,7 @@ Do not silently fall back to a direct typesafe.ai key.
 1. Find every TypeSafe client construction, raw `api.typesafe.ai` call, env
    variable, model ID, test mock and health check in the project.
 2. Point the client at `https://openrouter.ai/api` with the environment's
-   `OPENROUTER_API_KEY`; keep request shapes unchanged.
+   `OPENROUTER_TYPESAFE_API_KEY`; keep request shapes unchanged.
 3. Change pinned `jev-1.13.0` to `jev-1.13`, and relax exact response-model checks
    to accept the served OpenRouter ID. Update cost attribution (use `usage.cost`
    with OpenRouter as provider instead of a declared TypeSafe tariff), provider
