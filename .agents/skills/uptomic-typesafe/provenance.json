@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/uptomic/uptomic-hq",
+  "commit": "98163ab2908602385726e1e21cea7915a96cf7ac",
+  "buildDigest": "9860a54cb861c7bf0ab19e5baf2326c53e3b0f5aba0987adf1349f8ea3f699ef",
+  "source": "skills/uptomic-typesafe",
+  "files": {
+    "SKILL.md": "167d75751c06bf7a4cb262e04f432b086d8e8488bc1c78a9f1b11f79276bda5c",
+    "agents/openai.yaml": "2a82f4a575ec99a724b24127c36bd53937e8ec8398661cf5f45ed4d3ca95edb9",
+    "references/openrouter.md": "13bce9065ba882783133add7f35e658646b29d2023814a1a4d48a204572c23c2",
+    "references/projects.md": "5dcb4d7ae35a14946efc1ed939cca76347edab1e68de88f55e75e8392f06b37c",
+    "references/repositories.json": "7c6f43be6abcc829838ba43e84109409f9d1b6441b50320983683a2a03084678"
+  },
+  "updates": "Change and review the HQ source, then explicitly refresh this snapshot. Credentials are never included."
+}
