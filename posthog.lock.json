@@ -1,30 +1,30 @@
 {
   "candidateImages": {
-    "mcp": "ghcr.io/uptomic/posthog-railway/mcp:sha-a5f437083dda"
+    "mcp": "ghcr.io/uptomic/posthog-railway/mcp:sha-d0c3c1655650"
   },
   "supportingImages": {
     "gateway": "docker.io/library/caddy@sha256:5f5c8640aae01df9654968d946d8f1a56c497f1dd5c5cda4cf95ab7c14d58648"
   },
   "officialImages": {
     "main": {
-      "createdAt": "2026-10-09T01:51:52.082848059Z",
-      "digest": "sha256:e71885619d12471edd1adfb7badb6d756ca1bef140c9b467c8cce8c049b86659",
-      "image": "ghcr.io/posthog/posthog@sha256:e71885619d12471edd1adfb7badb6d756ca1bef140c9b467c8cce8c049b86659",
-      "revision": "a5f437083ddaf9891e734c1d8fe1419a7ed720a9",
+      "createdAt": "2026-10-10T01:09:25.412857848Z",
+      "digest": "sha256:9567bb72199cfb54c0d57ff9efd30c1e8de1bdcb8db4d166e12770663a878283",
+      "image": "ghcr.io/posthog/posthog@sha256:9567bb72199cfb54c0d57ff9efd30c1e8de1bdcb8db4d166e12770663a878283",
+      "revision": "d0c3c16556500062c29489d312e97862d240bc70",
       "source": "https://github.com/PostHog/posthog"
     },
     "capture": {
-      "createdAt": "2026-10-08T15:20:56.989044548Z",
-      "digest": "sha256:a8db9e864550520ddb55cf570593e99b9e6cc44de64e71a91b118624bbed1716",
-      "image": "ghcr.io/posthog/posthog/capture@sha256:a8db9e864550520ddb55cf570593e99b9e6cc44de64e71a91b118624bbed1716",
-      "revision": "46da12fa13e6777d1ae57e558e9686bb6e523466",
+      "createdAt": "2026-10-09T07:33:36.808119339Z",
+      "digest": "sha256:ab7d81924f8753012dea569fb539b893864b412fa8fc1483d3c10d36bc6a5e0c",
+      "image": "ghcr.io/posthog/posthog/capture@sha256:ab7d81924f8753012dea569fb539b893864b412fa8fc1483d3c10d36bc6a5e0c",
+      "revision": "14a43b7a00ca32de5e85bfd913a8cecb858343c3",
       "source": "https://github.com/PostHog/posthog"
     },
     "cymbal": {
-      "createdAt": "2026-10-08T14:22:16.47279543Z",
-      "digest": "sha256:299fae14b5d93dd423e606b4fd25d9d8981e1c43e781039e287421ab79ea92bf",
-      "image": "ghcr.io/posthog/posthog/cymbal@sha256:299fae14b5d93dd423e606b4fd25d9d8981e1c43e781039e287421ab79ea92bf",
-      "revision": "1159c97740c44f45f3873f4ddb21ad65536ed804",
+      "createdAt": "2026-10-09T16:33:35.490866559Z",
+      "digest": "sha256:0b33675bddf06c3cc7600a7d56a2b843de8e17cd8eb599da810951572eecee7c",
+      "image": "ghcr.io/posthog/posthog/cymbal@sha256:0b33675bddf06c3cc7600a7d56a2b843de8e17cd8eb599da810951572eecee7c",
+      "revision": "ef168ea27dc06a3f8a58cf9c0cdfed0de896ba79",
       "source": "https://github.com/PostHog/posthog"
     },
     "feature-flags": {
@@ -49,10 +49,10 @@
       "source": "https://github.com/PostHog/posthog"
     },
     "node": {
-      "createdAt": "2026-10-09T01:22:09.992161717Z",
-      "digest": "sha256:7f5beef40d3f9ded507ffe71ec368ed8a5dd4aad45c6056cfc5076ddbfdf0504",
-      "image": "ghcr.io/posthog/posthog-node@sha256:7f5beef40d3f9ded507ffe71ec368ed8a5dd4aad45c6056cfc5076ddbfdf0504",
-      "revision": "4167780b3bc0af88f46a7cc381b06b07053e168d",
+      "createdAt": "2026-10-10T00:21:56.481300119Z",
+      "digest": "sha256:a7f4a69f5f4ab920e356fb3ed1268729e050dd6e819222eb21015a7b8e094dbe",
+      "image": "ghcr.io/posthog/posthog-node@sha256:a7f4a69f5f4ab920e356fb3ed1268729e050dd6e819222eb21015a7b8e094dbe",
+      "revision": "04cdf1c6dedee995bca3af0b7089fa2363066161",
       "source": "https://github.com/PostHog/posthog"
     },
     "personhog-replica": {
@@ -100,8 +100,8 @@
       "source": "https://github.com/PostHog/posthog"
     }
   },
-  "resolvedAt": "2026-10-09T02:47:24.242Z",
+  "resolvedAt": "2026-10-10T02:46:12.314Z",
   "schemaVersion": 1,
-  "upstreamCommit": "a5f437083ddaf9891e734c1d8fe1419a7ed720a9",
+  "upstreamCommit": "d0c3c16556500062c29489d312e97862d240bc70",
   "upstreamRepository": "PostHog/posthog"
 }
