@@ -1,0 +1,676 @@
+{
+  "repositories": [
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "8base CLI",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/8baser-cli",
+      "url": "https://github.com/uptomic/8baser-cli"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/Pitch-Deck",
+      "url": "https://github.com/uptomic/Pitch-Deck"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Uptomic website redesign \u2014 Pencil mockups, copy decks, and all website-related files",
+      "isArchived": true,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/Uptomic-website-june2026",
+      "url": "https://github.com/uptomic/Uptomic-website-june2026"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "openai project for html highlight",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/ai-highlight",
+      "url": "https://github.com/uptomic/ai-highlight"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "master"
+      },
+      "description": "AI Interview System - Extracted from career-mentor",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/ai-interview",
+      "url": "https://github.com/uptomic/ai-interview"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Alaka AI Agent - Task management and automation system",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/alaka-agent",
+      "url": "https://github.com/uptomic/alaka-agent"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "master"
+      },
+      "description": "Random model work",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/alaka-model",
+      "url": "https://github.com/uptomic/alaka-model"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/career-mentor",
+      "url": "https://github.com/uptomic/career-mentor"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/career-path-graph",
+      "url": "https://github.com/uptomic/career-path-graph"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/career-path-navigator",
+      "url": "https://github.com/uptomic/career-path-navigator"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/chaching",
+      "url": "https://github.com/uptomic/chaching"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "codex/netcup-bootstrap"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/codex-anywhere",
+      "url": "https://github.com/uptomic/codex-anywhere"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "A template project for using with cursor ai",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cursor-template",
+      "url": "https://github.com/uptomic/cursor-template"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Cloudflare based implementation of CV parser",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cv-parser-worker",
+      "url": "https://github.com/uptomic/cv-parser-worker"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Zapier Plugin for CV Formatting",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cvformatter-zapier",
+      "url": "https://github.com/uptomic/cvformatter-zapier"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "CVR monorepo",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cvr",
+      "url": "https://github.com/uptomic/cvr"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "master"
+      },
+      "description": "AI Agents for CVR",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cvr-agents",
+      "url": "https://github.com/uptomic/cvr-agents"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "AI API in CVR project to extract & process Skills ",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cvr-ai-api",
+      "url": "https://github.com/uptomic/cvr-ai-api"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "develop"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cvr-api",
+      "url": "https://github.com/uptomic/cvr-api"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "CVR API",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cvr-cloud",
+      "url": "https://github.com/uptomic/cvr-cloud"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Monorepo for all CVR apps",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cvr-combined",
+      "url": "https://github.com/uptomic/cvr-combined"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cvr-compare-guardian",
+      "url": "https://github.com/uptomic/cvr-compare-guardian"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cvr-html-tagger",
+      "url": "https://github.com/uptomic/cvr-html-tagger"
+    },
+    {
+      "defaultBranchRef": {
+        "name": ""
+      },
+      "description": "Project to develop and test templates",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cvr-template",
+      "url": "https://github.com/uptomic/cvr-template"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "End to end test suite for CVR",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cvr-test",
+      "url": "https://github.com/uptomic/cvr-test"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cvr-ui",
+      "url": "https://github.com/uptomic/cvr-ui"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Creates a synthetic cv based on templates or prompts",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/cyber-cv",
+      "url": "https://github.com/uptomic/cyber-cv"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "master"
+      },
+      "description": "Monorepo for DD214 parsing service, synthetic data generation, and management UI",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/dd214",
+      "url": "https://github.com/uptomic/dd214"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/dd214-extractor",
+      "url": "https://github.com/uptomic/dd214-extractor"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/feedback-hub",
+      "url": "https://github.com/uptomic/feedback-hub"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "master"
+      },
+      "description": "Internal libraries for CV Formatting",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/formatter",
+      "url": "https://github.com/uptomic/formatter"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Git mover - Clones repos between orgs",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/glft",
+      "url": "https://github.com/uptomic/glft"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/job-ai-db",
+      "url": "https://github.com/uptomic/job-ai-db"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/job-details-design",
+      "url": "https://github.com/uptomic/job-details-design"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Agentic market-pain research engine adapted from last30days",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/kvtchr",
+      "url": "https://github.com/uptomic/kvtchr"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "master"
+      },
+      "description": "Uptomic marketing",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/marketing",
+      "url": "https://github.com/uptomic/marketing"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/neal-gs-network-plan",
+      "url": "https://github.com/uptomic/neal-gs-network-plan"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "master"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/nodejs-esm-starter",
+      "url": "https://github.com/uptomic/nodejs-esm-starter"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Peter's sandbox",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/peter-sandbox",
+      "url": "https://github.com/uptomic/peter-sandbox"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/profile-editor",
+      "url": "https://github.com/uptomic/profile-editor"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/prompt-cv",
+      "url": "https://github.com/uptomic/prompt-cv"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Uptomic business intelligence and product health platform",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/pulse",
+      "url": "https://github.com/uptomic/pulse"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/release-manager",
+      "url": "https://github.com/uptomic/release-manager"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/shepherd",
+      "url": "https://github.com/uptomic/shepherd"
+    },
+    {
+      "defaultBranchRef": {
+        "name": ""
+      },
+      "description": "Application for testing and editing templates",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/template-dojo",
+      "url": "https://github.com/uptomic/template-dojo"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/template-dojo-2a3020a0",
+      "url": "https://github.com/uptomic/template-dojo-2a3020a0"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/templates-cli",
+      "url": "https://github.com/uptomic/templates-cli"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/tufte-career-insights",
+      "url": "https://github.com/uptomic/tufte-career-insights"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/upconsul",
+      "url": "https://github.com/uptomic/upconsul"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "master"
+      },
+      "description": "Uptomic Public Website",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic",
+      "url": "https://github.com/uptomic/uptomic"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-ai-job-lens",
+      "url": "https://github.com/uptomic/uptomic-ai-job-lens"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Operations tooling for Uptomic \u2014 Claude Code skills (uptomic-email), helper scripts, and references for outreach emails, Monday board interactions, and workflow automation.",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-automations",
+      "url": "https://github.com/uptomic/uptomic-automations"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Uptomic's company brain: durable company facts as reviewed Markdown entries, with Jev judgments for the decisions that maintain them",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-brain",
+      "url": "https://github.com/uptomic/uptomic-brain"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-budget-buddy",
+      "url": "https://github.com/uptomic/uptomic-budget-buddy"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Uptomic cli commands",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-cli",
+      "url": "https://github.com/uptomic/uptomic-cli"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "8base experiment for CV formatting",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-cv-8base",
+      "url": "https://github.com/uptomic/uptomic-cv-8base"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "AWS experiment for CV Formatting",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-cv-aws",
+      "url": "https://github.com/uptomic/uptomic-cv-aws"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-dashboard-v5-27-jan26",
+      "url": "https://github.com/uptomic/uptomic-dashboard-v5-27-jan26"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-demo",
+      "url": "https://github.com/uptomic/uptomic-demo"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-demo-mock",
+      "url": "https://github.com/uptomic/uptomic-demo-mock"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Uptomic project context, repository map and shared agent workflows with reviewed gstack updates",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-hq",
+      "url": "https://github.com/uptomic/uptomic-hq"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Uptomic ideas discovery, triage, and competition intelligence pipeline",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-ideas-pipeline",
+      "url": "https://github.com/uptomic/uptomic-ideas-pipeline"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": false,
+      "nameWithOwner": "uptomic/uptomic-posthog",
+      "url": "https://github.com/uptomic/uptomic-posthog"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "Astro-based public marketing and blog site for Uptomic",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-web",
+      "url": "https://github.com/uptomic/uptomic-web"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": true,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/uptomic-website-27-oct-13581",
+      "url": "https://github.com/uptomic/uptomic-website-27-oct-13581"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/welcome-wagon-setup",
+      "url": "https://github.com/uptomic/welcome-wagon-setup"
+    },
+    {
+      "defaultBranchRef": {
+        "name": "main"
+      },
+      "description": "AI-powered job transformation analyzer - analyzes how AI will impact job roles, identifies automatable tasks, and generates actionable upskilling recommendations",
+      "isArchived": false,
+      "isPrivate": true,
+      "nameWithOwner": "uptomic/work-evolved",
+      "url": "https://github.com/uptomic/work-evolved"
+    }
+  ],
+  "source": "GitHub organization repository inventory curated for shared Uptomic context; user-requested exclusions preserved",
+  "verifiedOn": "2026-09-24"
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Uptomic GBrain"
+  short_description: "Recall and maintain shared company knowledge"
+  default_prompt: "Use $uptomic-gbrain to recall relevant knowledge and save durable findings with evidence."
+policy:
+  allow_implicit_invocation: true
