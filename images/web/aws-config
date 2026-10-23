@@ -1,0 +1,4 @@
+[default]
+region = auto
+s3 =
+    addressing_style = virtual

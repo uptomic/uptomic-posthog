@@ -2,6 +2,7 @@ import candidatePayload from "../posthog.candidate.json";
 import lockPayload from "../posthog.lock.json";
 import type { CandidateRelease, PosthogLock } from "./lib/upstream";
 import { assertNodeOverlayCandidate } from "./lib/node-overlay";
+import { assertWebOverlayCandidate } from "./lib/web-overlay";
 import { assertClickhouseBuildCandidate } from "./lib/clickhouse-build";
 
 const candidate = candidatePayload as CandidateRelease;
@@ -17,6 +18,7 @@ export function assertCandidateMatchesLock(candidate: CandidateRelease, lock: Po
     throw new Error("Built candidate does not match the locked PostHog release");
   }
   assertNodeOverlayCandidate(candidate, lock);
+  assertWebOverlayCandidate(candidate, lock);
   assertClickhouseBuildCandidate(candidate, lock);
 }
 const browserlessClientEnvironment = {
@@ -38,6 +40,7 @@ export function buildRailwayPlan(candidate: CandidateRelease, lock: PosthogLock)
     "CDP_VALKEY_HOST must reference a dedicated Valkey-compatible service before Node services start.",
     "PersonHog Replica and PersonHog Router must start before any Node CDP service.",
     "All Node roles use one guarded overlay derived from the pinned official image and inherit its CMD/ENTRYPOINT unchanged.",
+    "Main application roles use one guarded Web overlay derived from the pinned official image with virtual S3 addressing for Railway Storage Buckets.",
     "Pause production writers by removing their active deployments and verifying they stopped; Railway region=0 removes the region configuration and can fall back to us-west2=1.",
     "The inherited Capture service is the public Caddy gateway; PostHog-Capture-Backend runs the official capture image.",
     "Move posthog.uptomic.com to the Capture gateway and update its Cloudflare CNAME; Career Mentor SDK configuration stays unchanged.",
@@ -56,7 +59,7 @@ export function buildRailwayPlan(candidate: CandidateRelease, lock: PosthogLock)
       startCommand: "./bin/migrate --scope=clickhouse",
     },
     "PostHog Release Migrator": {
-      image: lock.officialImages.main.image,
+      image: candidate.images.web,
       restartPolicy: "NEVER",
       startCommand: "./bin/migrate",
     },
@@ -74,17 +77,17 @@ export function buildRailwayPlan(candidate: CandidateRelease, lock: PosthogLock)
       environment: { GRPC_ADDRESS: "[::]:50052" },
     },
     Web: {
-      image: lock.officialImages.main.image,
+      image: candidate.images.web,
       startCommand: "./bin/docker-server",
       environment: { GRANIAN_HOST: "::", ...browserlessClientEnvironment },
     },
     Worker: {
-      image: lock.officialImages.main.image,
+      image: candidate.images.web,
       startCommand: "./bin/docker-worker-celery --with-scheduler",
       environment: browserlessClientEnvironment,
     },
     "Temporal Django Worker": {
-      image: lock.officialImages.main.image,
+      image: candidate.images.web,
       startCommand: "./bin/temporal-django-worker",
     },
     Plugins: {

@@ -68,12 +68,23 @@ describe("immutable Node release contract", () => {
     expect(workflow.on.workflow_dispatch.inputs.update_upstream.default).toBe(false);
     const resolve = workflow.jobs.resolve;
     expect(resolve.steps.find((step: any) => step.id === "lock").run).toContain('"${{ github.event_name }}" = schedule ] || [ "${{ inputs.update_upstream }}" = true');
-    expect(resolve.outputs.source_sha).toBe("${{ github.sha }}");
+    expect(resolve.outputs.source_sha).toBe("${{ steps.source.outputs.sha }}");
+    expect(resolve.outputs.source_ref).toBe("${{ github.ref_name }}");
+    const lockCommit = resolve.steps.findIndex((step: any) => step.name === "Commit a changed upstream lock");
+    const sourceRevision = resolve.steps.findIndex((step: any) => step.id === "source");
+    expect(sourceRevision).toBeGreaterThan(lockCommit);
+    expect(resolve.steps.find((step: any) => step.id === "source").run).toContain("git rev-parse HEAD");
     expect(workflow.jobs["build-node"].steps[0].with.ref).toBe("${{ needs.resolve.outputs.source_sha }}");
     expect(workflow.jobs.verify.steps[0].with.ref).toBe("${{ needs.resolve.outputs.source_sha }}");
     expect(workflow.jobs.verify.needs).toContain("build-node");
-    expect(workflow.jobs.verify.strategy.matrix.component).toEqual(["clickhouse", "mcp", "node"]);
+    expect(workflow.jobs.verify.strategy.matrix.component).toEqual(["clickhouse", "mcp", "node", "web"]);
+    expect(workflow.jobs["build-web"].steps[0].with.ref).toBe("${{ needs.resolve.outputs.source_sha }}");
+    expect(workflow.jobs.verify.needs).toContain("build-web");
     expect(workflow.jobs.finalize.needs).toContain("verify");
+    expect(workflow.jobs.finalize.steps[0].with.ref).toBe("${{ needs.resolve.outputs.source_sha }}");
+    const finalizeCommit = workflow.jobs.finalize.steps.find((step: any) => step.name === "Commit the candidate manifest");
+    expect(finalizeCommit.env.SOURCE_REF).toBe("${{ needs.resolve.outputs.source_ref }}");
+    expect(finalizeCommit.run).toContain('git push origin "HEAD:${SOURCE_REF}"');
     expect(workflow.jobs.verify.steps.at(-1).run).toContain("bun scripts/node-smoke.ts");
   });
 

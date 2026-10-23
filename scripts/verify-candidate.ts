@@ -2,6 +2,7 @@ import candidatePayload from "../posthog.candidate.json";
 import lockPayload from "../posthog.lock.json";
 import type { CandidateRelease, PosthogLock } from "./lib/upstream";
 import { assertNodeOverlayCandidate } from "./lib/node-overlay";
+import { assertWebOverlayCandidate } from "./lib/web-overlay";
 import { assertClickhouseBuildCandidate } from "./lib/clickhouse-build";
 
 const candidate = candidatePayload as CandidateRelease;
@@ -11,10 +12,11 @@ if (candidate.schemaVersion !== 1 || candidate.upstreamCommit !== lock.upstreamC
 }
 
 const candidateComponents = Object.keys(candidate.images).sort();
-if (JSON.stringify(candidateComponents) !== JSON.stringify(["clickhouse", "mcp", "node"])) {
-  throw new Error("Candidate must lock ClickHouse, MCP, and the guarded Node overlay images");
+if (JSON.stringify(candidateComponents) !== JSON.stringify(["clickhouse", "mcp", "node", "web"])) {
+  throw new Error("Candidate must lock ClickHouse, MCP, Web, and the guarded Node overlay images");
 }
 assertNodeOverlayCandidate(candidate, lock);
+assertWebOverlayCandidate(candidate, lock);
 assertClickhouseBuildCandidate(candidate, lock);
 
 for (const [component, image] of Object.entries(candidate.images)) {

@@ -34,14 +34,14 @@ PostHog does not publish versioned self-hosted releases. Upstream ships continuo
    dictionary reader required by PostHog's local-single schema alongside the authenticated
    Railway network user. Its immutable tag
    includes a fingerprint of those build inputs so a runtime-config change cannot silently reuse an old image.
-   The Node build applies guarded private-host-only Redis address-family handling and a Janitor-owned
+   The Web build layers a guarded botocore config file that selects virtual S3 addressing for all Web-derived roles. The Node build applies guarded private-host-only Redis address-family handling and a Janitor-owned
    idle PostgreSQL pool error listener to the exact official base, without changing upstream commands,
    entrypoints or process-wide error handling. Its immutable tag fingerprints both the base and overlay
    files; exact-image tests exercise IPv6/IPv4 Redis and real PostgreSQL disconnect/reconnect behavior.
-   All three images are published with provenance and SBOMs to GHCR. Manual workflow runs keep the
+   All four images are published with provenance and SBOMs to GHCR. Manual workflow runs keep the
    current lock unless `update_upstream=true` is explicitly selected; scheduled runs resolve upstream.
-4. A successful build writes a second manifest that pins the built MCP, ClickHouse and Node images
-   by OCI digest, including the Node base revision and overlay fingerprint.
+4. A successful build writes a second manifest that pins the built MCP, ClickHouse, Node and Web
+   images by OCI digest, including the Node and Web base revisions and overlay fingerprints.
 5. `bun run railway:plan` renders the coordinated application-service update, including PersonHog,
    the isolated Cyclotron schema migrator, and the Node Cyclotron V2 janitor. It does not apply it.
 6. Production promotion requires verified volume backups, migration completion, a canary smoke run,

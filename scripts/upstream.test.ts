@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { isSameRelease, officialComponents } from "./lib/upstream";
 import type { CandidateRelease, PosthogLock } from "./lib/upstream";
 import { nodeOverlayProvenance } from "./lib/node-overlay";
+import { webOverlayProvenance } from "./lib/web-overlay";
 import { clickhouseBuildProvenance } from "./lib/clickhouse-build";
 import productionBaseline from "../railway.production.json";
 import lockPayload from "../posthog.lock.json";
@@ -20,7 +21,9 @@ const candidateFixture: CandidateRelease = {
   images: { ...candidatePayload.images,
     node: `ghcr.io/uptomic/posthog-railway/node@sha256:${"1".repeat(64)}`,
     clickhouse: `ghcr.io/uptomic/posthog-railway/clickhouse@sha256:${"2".repeat(64)}`,
+    web: `ghcr.io/uptomic/posthog-railway/web@sha256:${"3".repeat(64)}`,
   },
+  webOverlay: webOverlayProvenance(lockPayload as PosthogLock),
   nodeOverlay: nodeOverlayProvenance(lockPayload as PosthogLock),
   clickhouseBuild: clickhouseBuildProvenance(lockPayload),
 };
@@ -85,7 +88,7 @@ describe("PostHog release bundle ownership", () => {
       serviceId: "27dff4e2-fedd-4633-98fc-27556efd5cd5",
       healthcheckPath: "/_readiness",
     });
-    expect(railwayPlan.services.Web.image).toBe(lock.officialImages.main.image);
+    expect(railwayPlan.services.Web.image).toBe(candidateFixture.images.web);
   });
 
   test("owns the gateway SDK routes in one versioned Caddyfile", () => {
@@ -185,6 +188,17 @@ describe("PostHog release bundle ownership", () => {
     }
   });
 
+  test("keeps every main application role on the guarded virtual-addressing image", () => {
+    for (const serviceName of [
+      "PostHog Release Migrator",
+      "Web",
+      "Worker",
+      "Temporal Django Worker",
+    ] as const) {
+      expect(railwayPlan.services[serviceName].image).toBe(candidateFixture.images.web);
+    }
+  });
+
   test("keeps every Node role on the same guarded image and inherited built-in command", () => {
     for (const serviceName of [
       "Cyclotron V2 Janitor",
@@ -254,6 +268,17 @@ describe("PostHog release bundle ownership", () => {
     expect(wiring).toContain("overlay enables IPv6-only private Redis URL hostnames");
     expect(wiring).toContain("Do not append ?family=6");
     expect(railwayPlan.services["Recording API"].image).toBe(candidateFixture.images.node);
+  });
+
+  test("rejects a missing or stale Web overlay instead of falling back to official Web", () => {
+    for (const candidate of [
+      { ...candidateFixture, images: { ...candidateFixture.images, web: lockPayload.officialImages.main.image } },
+      { ...candidateFixture, webOverlay: { ...candidateFixture.webOverlay, fingerprintSha256: "0".repeat(64) } },
+      { ...candidateFixture, webOverlay: { ...candidateFixture.webOverlay, baseImage: "different-base" } },
+      { ...candidateFixture, webOverlay: { ...candidateFixture.webOverlay, baseRevision: "0".repeat(40) } },
+    ]) {
+      expect(() => buildRailwayPlan(candidate, lockPayload as PosthogLock)).toThrow("Built Web overlay does not match");
+    }
   });
 
   test("rejects a missing or stale Node overlay instead of falling back to official Node", () => {

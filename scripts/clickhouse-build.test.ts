@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { assertClickhouseBuildCandidate, clickhouseBuildFiles, clickhouseBuildProvenance, clickhouseCandidateTag } from "./lib/clickhouse-build";
 import { assertCandidateMatchesLock } from "./render-railway-plan";
 import { nodeOverlayProvenance } from "./lib/node-overlay";
+import { webOverlayProvenance } from "./lib/web-overlay";
 import type { CandidateRelease, PosthogLock } from "./lib/upstream";
 import lockPayload from "../posthog.lock.json";
 import candidatePayload from "../posthog.candidate.json";
@@ -10,8 +11,13 @@ import candidatePayload from "../posthog.candidate.json";
 const lock = lockPayload as PosthogLock;
 const candidate: CandidateRelease = { ...candidatePayload,
   upstreamCommit: lock.upstreamCommit,
-  images: { ...candidatePayload.images, clickhouse: `ghcr.io/uptomic/posthog-railway/clickhouse@sha256:${"2".repeat(64)}` },
+  images: {
+    ...candidatePayload.images,
+    clickhouse: `ghcr.io/uptomic/posthog-railway/clickhouse@sha256:${"2".repeat(64)}`,
+    web: `ghcr.io/uptomic/posthog-railway/web@sha256:${"3".repeat(64)}`,
+  },
   clickhouseBuild: clickhouseBuildProvenance(lock),
+  webOverlay: webOverlayProvenance(lock),
   nodeOverlay: nodeOverlayProvenance(lock),
 };
 

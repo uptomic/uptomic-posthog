@@ -2,6 +2,7 @@ import type { CandidateRelease, PosthogLock } from "./lib/upstream";
 import lockPayload from "../posthog.lock.json";
 import { nodeOverlayProvenance } from "./lib/node-overlay";
 import { clickhouseBuildProvenance } from "./lib/clickhouse-build";
+import { webOverlayProvenance } from "./lib/web-overlay";
 
 const lock = lockPayload as PosthogLock;
 const digestPattern = /^sha256:[0-9a-f]{64}$/;
@@ -9,6 +10,7 @@ const commit = process.env.EXPECTED_COMMIT;
 const clickhouseDigest = process.env.CLICKHOUSE_DIGEST;
 const mcpDigest = process.env.MCP_DIGEST;
 const nodeDigest = process.env.NODE_DIGEST;
+const webDigest = process.env.WEB_DIGEST;
 
 if (!commit || !/^[0-9a-f]{40}$/.test(commit)) {
   throw new Error("EXPECTED_COMMIT must be a full Git commit SHA");
@@ -22,9 +24,14 @@ if (!clickhouseDigest || !digestPattern.test(clickhouseDigest)) {
 if (!nodeDigest || !digestPattern.test(nodeDigest)) {
   throw new Error("NODE_DIGEST must be an OCI sha256 digest");
 }
+if (!webDigest || !digestPattern.test(webDigest)) {
+  throw new Error("WEB_DIGEST must be an OCI sha256 digest");
+}
+const webOverlay = webOverlayProvenance(lock);
 const nodeOverlay = nodeOverlayProvenance(lock);
 const clickhouseBuild = clickhouseBuildProvenance(lock);
-if (commit !== lock.upstreamCommit || process.env.NODE_OVERLAY_SHA256 !== nodeOverlay.fingerprintSha256 ||
+if (commit !== lock.upstreamCommit || process.env.WEB_OVERLAY_SHA256 !== webOverlay.fingerprintSha256 ||
+  process.env.NODE_OVERLAY_SHA256 !== nodeOverlay.fingerprintSha256 ||
   process.env.CLICKHOUSE_BUILD_SHA256 !== clickhouseBuild.fingerprintSha256) {
   throw new Error("Built candidate inputs changed before finalization");
 }
@@ -36,7 +43,9 @@ const release: CandidateRelease = {
     clickhouse: `ghcr.io/uptomic/posthog-railway/clickhouse@${clickhouseDigest}`,
     mcp: `ghcr.io/uptomic/posthog-railway/mcp@${mcpDigest}`,
     node: `ghcr.io/uptomic/posthog-railway/node@${nodeDigest}`,
+    web: `ghcr.io/uptomic/posthog-railway/web@${webDigest}`,
   },
+  webOverlay,
   nodeOverlay,
   schemaVersion: 1,
   upstreamCommit: commit,
@@ -50,6 +59,7 @@ if (await existingFile.exists()) {
     existing.schemaVersion === release.schemaVersion &&
     existing.upstreamCommit === release.upstreamCommit &&
     JSON.stringify(existing.images) === JSON.stringify(release.images) &&
+    JSON.stringify(existing.webOverlay) === JSON.stringify(release.webOverlay) &&
     JSON.stringify(existing.nodeOverlay) === JSON.stringify(release.nodeOverlay) &&
     JSON.stringify(existing.clickhouseBuild) === JSON.stringify(release.clickhouseBuild)
   ) {

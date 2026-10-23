@@ -66,6 +66,12 @@ export interface CandidateRelease {
     clickhouse: string;
     mcp: string;
     node: string;
+    web: string;
+  };
+  webOverlay: {
+    baseImage: string;
+    baseRevision: string;
+    fingerprintSha256: string;
   };
   nodeOverlay: {
     baseImage: string;
