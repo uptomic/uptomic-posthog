@@ -176,3 +176,76 @@ Both production rollback paths are therefore executed procedures, not plans.
   Property Defs RS, PersonHog Replica, PersonHog Router, Cymbal, Cymbal Resolution, PostHog MCP
   and Feature Flags. Kept running so SDK traffic buffers into Kafka: the Capture gateway,
   PostHog-Capture-Backend, Replay Capture, Hypercache and Livestream.
+
+## Production window (2026-11-08)
+
+Baseline before the window (09:51 UTC): `/login` 200, `/_preflight` all true including celery,
+capture, flags and replay 200, and the canary event visible in ClickHouse.
+
+| Time (UTC) | Step | Result |
+| --- | --- | --- |
+| 10:04 | Removed 16 writer deployments (window project token) | none active after 20 s; no client sessions on `posthog`/`cyclotron_node` |
+| 10:05 | `pg_dump -Fc` from leader Postgres-3 | `posthog` 60.0 MB, 650 data entries; `cyclotron_node` 10.7 KB (kept off-cluster on the worker) |
+| 10:06 | ClickHouse `BACKUP DATABASE default TO S3` (`prod-pre-a5f437083-20261108`) | `BACKUP_CREATED`; ledger 315; `sharded_events` 1,632,313 |
+| 10:09 | Railway ClickHouse volume backup | refused: plan limit of 10 backups per volume. The 08-30 anchors were not deleted; the drilled native backup is the rollback |
+| 10:06–10:08 | ClickHouse image `080bc023…` (start command unchanged), deployment `0dac325b` | SUCCESS; engine 26.6.2.158; ledger, rows and 340 tables unchanged |
+| 10:09–10:11 | `PERSON_MERGE_TOMBSTONE_TEAM_ALLOWLIST=""` on six Node roles; 22 image fields committed with `skipDeploys` | applied |
+| 10:11–10:26 | Release migrator `cb1d93dd-9eb2-489a-b354-7d98156c0642` | `All migrations completed successfully.`; ClickHouse ledger 357 |
+| 10:27–10:29 | Cyclotron schema migrator `467748aa-cae3-4a17-bd39-53d6f34a8b8e` | applied `20260821000001`; completed |
+| 10:29–10:30 | PersonHog Replica `b67e1a4b`, Router `8fedd86c` | SUCCESS |
+| 10:30–10:33 | Web `638a0679`, Worker `61a3bca6`, Temporal Django Worker `32ba5702` | SUCCESS |
+| 10:33–10:35 | Plugins `c588149e`, ingestion `1b16d576`, blob ingestion `5e6bc6ea`, Recording API `382451c5`, Cyclotron V2 Janitor `fecb6ade` | SUCCESS |
+| 10:35–10:37 | Cymbal Resolution `5104763e`, Cymbal `d9113bd6`, Error Tracking Ingestion `1cf1b36e` | SUCCESS |
+| 10:37–10:39 | Feature Flags `5f67c273`, Property Defs RS `fcbd7354`, Livestream `73c00d6c`, MCP `f54cff62` | SUCCESS |
+| 10:39–10:40 | Capture backend `eb34ba57`, Replay Capture `79543966`, Hypercache `b4895188` | SUCCESS |
+
+The Capture gateway stayed up throughout: `/health` 200, and a capture during the window
+returned 200.
+
+## Production acceptance
+
+- `/login` 200 HTML; `/_preflight` django, db, redis, clickhouse, kafka, plugins, celery and
+  object_storage all true.
+- Capture 200, then the event is queryable. The canary captured during the window at 10:11:52
+  was ingested at 10:35:17 (Kafka buffering, no loss). 53 real events timestamped inside the
+  window were present afterwards.
+- `/flags/?v=2` 200, `errorsWhileComputingFlags=false`.
+- `/s/` replay 200, then a row in `session_replay_events`.
+- MCP `mcp.posthog.uptomic.com`: `initialize` succeeded, `exec` `project-get` returned the
+  project, and a bounded `query-trends` aggregate returned results.
+- Log scan of 21 roles: no ingestion `ON CONFLICT` errors and no crash loops. The GeoLite2
+  file message predates the window. The MCP skill-catalog warmup timed out and the service
+  started without product skills, as it reports.
+- ClickHouse Kafka-engine "Can't get assignment" warnings predate the window (22,280 in
+  09:00–09:05 vs 14,549 in a 5-minute sample afterwards).
+- New after the window: a stuck `GET_PART` replication-queue entry on
+  `default.sharded_query_log_archive_old` (PostHog's internal query-log archive, retired by this
+  release). It does not affect events, persons, replay or flags.
+
+## Retained anchors and cleanup
+
+- The pre-window ClickHouse native backup is retained in the `ph-rehearsal-1108` environment's
+  bucket under `prod-pre-a5f437083-20261108/` (29,228 objects, 3.67 GiB). This is the drilled
+  rollback source. That environment's 22 services and their volumes were deleted after
+  acceptance; the bucket was kept.
+- Pre-window `posthog` and `cyclotron_node` dumps are retained owner-only on the worker
+  (`/data/tmp/codex/ph-window/`) until rollback is no longer needed.
+- The window project token was deleted after the last production mutation.
+- The 2026-08-30 Railway volume backup anchors were not touched.
+
+## Follow-ups
+
+1. Scheduled candidate builds have failed since 2026-10-10 (Node Redis overlay drift, and
+   upstream's ClickHouse base moved past `26.6.2.158`). The next promotion needs a reviewed
+   overlay update and a separately gated ClickHouse server upgrade.
+2. Add `PERSON_MERGE_TOMBSTONE_TEAM_ALLOWLIST=""` for the Node roles to
+   `render-railway-plan.ts`, with a test, so future plans carry this correction. Alternatively,
+   adopt upstream's partitioned person table and its `(team_id, uuid)` index as a reviewed
+   schema change.
+3. Replace the `posthog-railway-release` identity's invalid `RAILWAY_API_TOKEN`.
+4. Clear the stuck `GET_PART` entry on `sharded_query_log_archive_old`, or accept it until
+   upstream drops the table.
+5. The ClickHouse volume has reached the 10-backup plan limit; prune expired anchors with
+   explicit approval.
+6. Production Node roles carry production Redis's literal IPv6 address in `REDIS_URL` and
+   `CDP_REDIS_HOST`. It works, but a Redis redeploy that changes its address would break them.
