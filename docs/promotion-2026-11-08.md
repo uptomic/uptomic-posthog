@@ -231,7 +231,10 @@ returned 200.
 - Pre-window `posthog` and `cyclotron_node` dumps are retained owner-only on the worker
   (`/data/tmp/codex/ph-window/`) until rollback is no longer needed.
 - The window project token was deleted after the last production mutation.
-- The 2026-08-30 Railway volume backup anchors were not touched.
+- On 2026-11-09, with the owner's approval to delete older copies, the seven oldest ClickHouse
+  volume backups were deleted (both 2026-08-30 manual anchors, the September and October monthly
+  backups, and the 10-17, 10-24 and 10-31 weekly backups). The post-upgrade volume backup
+  `post-a5f437083-20261109` (`7a24504c`) was then taken, leaving 10 on the volume.
 
 ## Follow-ups
 
@@ -245,7 +248,10 @@ returned 200.
 3. Replace the `posthog-railway-release` identity's invalid `RAILWAY_API_TOKEN`.
 4. Clear the stuck `GET_PART` entry on `sharded_query_log_archive_old`, or accept it until
    upstream drops the table.
-5. The ClickHouse volume has reached the 10-backup plan limit; prune expired anchors with
-   explicit approval.
+5. The 10-backup plan limit counts scheduled backups, and the daily (6-day), weekly (27-day)
+   and monthly (89-day) schedules alone hold about 13. Scheduled backups still run past the
+   limit, but every manual backup is refused. Add a runbook step that deletes the oldest
+   scheduled backups before the pre-window backup, and deletes the previous manual backup once
+   the next promotion is accepted; or drop one schedule.
 6. Production Node roles carry production Redis's literal IPv6 address in `REDIS_URL` and
    `CDP_REDIS_HOST`. It works, but a Redis redeploy that changes its address would break them.
