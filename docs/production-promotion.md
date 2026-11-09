@@ -67,7 +67,14 @@ data because the inherited deployment predates the current candidate by several 
 
 ## Production
 
-1. Enter the maintenance window and create named pre-upgrade backups.
+1. Enter the maintenance window and create named pre-upgrade backups. Railway allows 10 backups
+   per volume and counts scheduled backups toward that limit. The daily, weekly and monthly
+   schedules alone hold about 13, so a manual backup is refused while the volume is at the limit.
+   Before the window, list each volume's backups (`volumeInstanceBackupList`) and delete the
+   oldest scheduled backups (`volumeInstanceBackupDelete`, one at a time) until there are at
+   most 9. Keep the newest daily backup and the previous promotion's manual backup until this
+   one is created. After this promotion is accepted, delete the previous promotion's manual
+   backup, because manual backups never expire.
 2. Record the active writer deployment IDs, explicitly remove those active deployments, and verify
    that no writer deployment remains running before taking the final logical metadata dump. Do not
    treat `region=0` scaling as a pause: Railway removes that region configuration and can fall back
