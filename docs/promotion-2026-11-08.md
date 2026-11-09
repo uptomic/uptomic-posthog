@@ -250,8 +250,8 @@ returned 200.
    upstream drops the table.
 5. The 10-backup plan limit counts scheduled backups, and the daily (6-day), weekly (27-day)
    and monthly (89-day) schedules alone hold about 13. Scheduled backups still run past the
-   limit, but every manual backup is refused. Add a runbook step that deletes the oldest
-   scheduled backups before the pre-window backup, and deletes the previous manual backup once
-   the next promotion is accepted; or drop one schedule.
+   limit, but every manual backup is refused. Resolved in this PR: production step 1 of
+   [the runbook](production-promotion.md) now prunes the oldest scheduled backups before the
+   pre-window backup and deletes the previous manual backup after acceptance.
 6. Production Node roles carry production Redis's literal IPv6 address in `REDIS_URL` and
    `CDP_REDIS_HOST`. It works, but a Redis redeploy that changes its address would break them.
