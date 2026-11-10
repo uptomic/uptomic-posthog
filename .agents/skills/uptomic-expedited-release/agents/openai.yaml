@@ -1,0 +1,6 @@
+interface:
+  display_name: "Uptomic Expedited Release"
+  short_description: "Ship an owner-marked urgent change with tests, rollback and follow-up gates"
+  default_prompt: "Use $uptomic-expedited-release to run the expedited lane for the change the owner marked urgent."
+policy:
+  allow_implicit_invocation: true
