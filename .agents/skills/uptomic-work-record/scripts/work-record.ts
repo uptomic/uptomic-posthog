@@ -114,9 +114,13 @@ export function safeValue(value: string | undefined): string | undefined {
 
 /** owner/name from a Git remote URL; credentials and hosts are never kept. */
 export function repositoryName(remote: string | undefined): string | undefined {
+  const value = remote?.trim() ?? '';
   const match =
-    /(?:^|[/:@])github\.com[:/]+([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+?)(?:\.git)?\/?$/u.exec(
-      remote?.trim() ?? '',
+    /(?:^|[/:@])github\.com[:/]+([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+?)(?:\.git)?\/?$/u.exec(value) ??
+    // Claude Code cloud sessions reach GitHub through a loopback Git proxy:
+    // http://<user>@127.0.0.1:<port>/git/<owner>/<name>[.git]
+    /^http:\/\/[^/@\s]+@127\.0\.0\.1:\d{1,5}\/git\/([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+?)(?:\.git)?\/?$/u.exec(
+      value,
     );
   return match ? `${match[1]}/${match[2]}` : undefined;
 }
@@ -372,9 +376,8 @@ export class IssueNotFound extends Error {}
 
 function notFound(result: CommandResult, id: string): boolean {
   if (result.status === 0) return false;
-  if (new RegExp(`^Issue ${id.replace(/[.]/gu, '\\.')} not found$`, 'mu').test(result.stderr)) {
-    return true;
-  }
+  const escaped = id.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
+  if (new RegExp(`^Issue ${escaped} not found$`, 'mu').test(result.stderr)) return true;
   try {
     const value = JSON.parse(result.stdout) as { error?: unknown };
     return value.error === 'no issues found matching the provided IDs';
@@ -637,16 +640,11 @@ export function execute(
       try {
         issue = readIssue(bd, id);
       } catch (error) {
-        // A claim or an explicitly named issue must exist; an issue found
-        // implicitly that disappeared upstream (deleted) is simply not refreshed.
-        if (options.event === 'claim' || explicit.has(id) || !(error instanceof IssueNotFound)) {
-          throw error;
-        }
+        // An explicitly named issue must exist; an issue found implicitly that
+        // disappeared upstream (deleted) is simply not refreshed. (Claims pulled
+        // before reading and never reach this block.)
+        if (explicit.has(id) || !(error instanceof IssueNotFound)) throw error;
         log(`work-record: ${id} is no longer readable after pulling; not refreshed`);
-        continue;
-      }
-      if (options.event === 'claim') {
-        fresh.push(issue);
         continue;
       }
       const held = holdsRecord(current, storedRecord(issue.metadata));

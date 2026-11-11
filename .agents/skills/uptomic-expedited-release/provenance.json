@@ -1,7 +1,7 @@
 {
   "repository": "https://github.com/uptomic/uptomic-hq",
-  "commit": "5e185a1ffb2d00ac4942d414810daf3caabe7f61",
-  "buildDigest": "2a7eb0c5348a733af704a9dcac0f53b58871d13ea9fff62716c587a7b358b878",
+  "commit": "d7f4d49cd806f3d8dd844aa252a1a40ce237d80a",
+  "buildDigest": "35cd1e25f70a53fca86f667292d3eb47300ee00048f0b27b92fc76656b61f260",
   "source": "skills/uptomic-expedited-release",
   "files": {
     "SKILL.md": "a5c8cdc15ad2bacc77644aa178a975797d9faf3c06841cdff30c46b147cd72a6",
