@@ -220,7 +220,7 @@ returned 200.
   `POSTHOG_FINALIZATION_FAILED`. The envelope fix (uptomic/pulse#90) was merged the same evening but
   reached production only on 2026-11-11 (Beads `pulse-qte.7`). Pulse is moving to PostHog's
   versioned query API so that MCP output changes cannot break it again (`pulse-qte.8`). The 11:00
-  build failure noted above was a separate GitHub download error.
+  run additionally failed at build on a GitHub download error, which hid this on the day.
 - Log scan of 21 roles: no ingestion `ON CONFLICT` errors and no crash loops. The GeoLite2
   file message predates the window. The MCP skill-catalog warmup timed out and the service
   started without product skills, as it reports.
