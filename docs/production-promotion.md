@@ -100,7 +100,11 @@ data because the inherited deployment predates the current candidate by several 
    [private dependency path](private-networking.md). A public `/_livez` 200 is not private-connectivity
    proof; PersonHog gRPC and its IPv4-only metrics/readiness listeners are separate checks.
 9. Verify public health, event capture, query results, feature flags, replay, authenticated PostHog,
-   MCP, and Pulse's governed PostHog aggregate before leaving the window.
+   MCP, and Pulse's governed PostHog aggregate before leaving the window. For Pulse, run the
+   released Pulse sync-worker PostHog client itself, read-only with its production `/pulse/sync-worker`
+   variables, for the previous report date: the daily aggregate, inactivity churn and one navigation
+   batch must all decode. A different query, tool or endpoint on the same server is not proof; on
+   2026-11-08 `query-trends` passed while the `execute-sql` output Pulse decodes had changed.
    Canary storage counts must use `refresh=force_blocking` and report `is_cached=false`;
    repeating a cached zero does not prove ingestion failure. Check replay metadata and the
    actual recording blob separately, and never resend a canary merely to escape a stale query.

@@ -213,6 +213,14 @@ returned 200.
 - `/s/` replay 200, then a row in `session_replay_events`.
 - MCP `mcp.posthog.uptomic.com`: `initialize` succeeded, `exec` `project-get` returned the
   project, and a bounded `query-trends` aggregate returned results.
+- **Missed: Pulse's PostHog read was not tested.** Runbook step 9 requires Pulse's governed
+  aggregate. Only `query-trends` was checked, but Pulse also reads through MCP `execute-sql`, whose
+  output this bundle changed from a table string to a JSON envelope. Pulse's strict decoder rejected
+  it, and every hourly production sync from 2026-11-08 ~10:03 UTC failed with
+  `POSTHOG_FINALIZATION_FAILED`. The envelope fix (uptomic/pulse#90) was merged the same evening but
+  reached production only on 2026-11-11 (Beads `pulse-qte.7`). Pulse is moving to PostHog's
+  versioned query API so that MCP output changes cannot break it again (`pulse-qte.8`). The 11:00
+  build failure noted above was a separate GitHub download error.
 - Log scan of 21 roles: no ingestion `ON CONFLICT` errors and no crash loops. The GeoLite2
   file message predates the window. The MCP skill-catalog warmup timed out and the service
   started without product skills, as it reports.
