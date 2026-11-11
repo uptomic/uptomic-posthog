@@ -80,7 +80,8 @@ const SECRET_SHAPES: readonly RegExp[] = [
  */
 const FORMATS: Record<Field, RegExp> = {
   agent_tool: /^[a-z][a-z0-9._-]{0,39}$/u,
-  agent_model: /^[A-Za-z0-9][A-Za-z0-9._:/+-]{0,99}$/u,
+  // Harness model IDs may carry a bracketed variant, e.g. claude-opus-5-5[1m].
+  agent_model: /^[A-Za-z0-9][A-Za-z0-9._:/+[\]-]{0,99}$/u,
   agent_session: /^[A-Za-z0-9][A-Za-z0-9._:-]{0,159}$/u,
   agent_thread: /^[A-Za-z0-9][A-Za-z0-9._:-]{0,159}$/u,
   operator: /^[\p{L}\p{M}][\p{L}\p{M} .'-]{0,99}$/u,
@@ -120,11 +121,25 @@ export function repositoryName(remote: string | undefined): string | undefined {
   return match ? `${match[1]}/${match[2]}` : undefined;
 }
 
+// Variables that relocate Git's repository (a hook exports them). Transport and
+// credential-helper settings (GIT_SSH_COMMAND, GIT_ASKPASS, ...) stay intact.
+const REPOSITORY_VARIABLES = new Set([
+  'GIT_DIR',
+  'GIT_WORK_TREE',
+  'GIT_INDEX_FILE',
+  'GIT_OBJECT_DIRECTORY',
+  'GIT_ALTERNATE_OBJECT_DIRECTORIES',
+  'GIT_COMMON_DIR',
+  'GIT_NAMESPACE',
+  'GIT_PREFIX',
+  'GIT_QUARANTINE_PATH',
+]);
+
 function cleanEnvironment(env: Environment): Record<string, string> {
-  // A hook exports GIT_DIR and friends; never let them redirect our Git reads.
   return Object.fromEntries(
     Object.entries(env).filter(
-      (entry): entry is [string, string] => entry[1] !== undefined && !entry[0].startsWith('GIT_'),
+      (entry): entry is [string, string] =>
+        entry[1] !== undefined && !REPOSITORY_VARIABLES.has(entry[0]),
     ),
   );
 }
@@ -352,9 +367,29 @@ function run(bd: Runner, args: readonly string[]): string {
   return result.stdout;
 }
 
+/** bd reported that the issue does not exist (deleted, purged or never created). */
+export class IssueNotFound extends Error {}
+
+function notFound(result: CommandResult, id: string): boolean {
+  if (result.status === 0) return false;
+  if (new RegExp(`^Issue ${id.replace(/[.]/gu, '\\.')} not found$`, 'mu').test(result.stderr)) {
+    return true;
+  }
+  try {
+    const value = JSON.parse(result.stdout) as { error?: unknown };
+    return value.error === 'no issues found matching the provided IDs';
+  } catch {
+    return false;
+  }
+}
+
 export function readIssue(bd: Runner, id: string): Issue {
-  const issue = parseIssues(run(bd, ['show', id, '--json']))[0];
-  if (!issue) throw new Error(`Beads issue ${id} was not found`);
+  const args = ['show', id, '--json'];
+  const result = bd(args);
+  if (notFound(result, id)) throw new IssueNotFound(`Beads issue ${id} was not found`);
+  if (result.status !== 0) run(() => result, args);
+  const issue = parseIssues(result.stdout)[0];
+  if (!issue) throw new Error(`bd show ${id} returned no issue`);
   return issue;
 }
 
@@ -476,7 +511,7 @@ export function parseArguments(argv: readonly string[], env: Environment = proce
     if (flag === '--hook') options.hook = true;
     else if (flag === '--pull') options.pull = true;
     else if (flag === '--dry-run') options.dryRun = true;
-    else if (flag === '--issue' || flag in values) {
+    else if (flag === '--issue' || Object.hasOwn(values, flag)) {
       const value = rest[index + 1];
       if (!value || value.startsWith('--')) throw new Error(`${flag} needs a value`);
       index += 1;
@@ -521,7 +556,6 @@ export function execute(
     const missing = missingForClaim(current, detached);
     if (missing.length > 0) throw new Error(`claim is missing ${missing.join('; ')}`);
   }
-  if (options.pull && !options.dryRun && options.event !== 'show') run(bd, ['dolt', 'pull']);
   const discover = () => {
     const found = matchingIssues(bd, current);
     for (const issue of found.others) {
@@ -532,6 +566,10 @@ export function execute(
     }
     return found.held;
   };
+  // A claim always writes, and may name an issue published since the last sync,
+  // so it pulls before reading. Refreshes pull later, only when they will write.
+  const claimPull = options.event === 'claim' && options.pull && !options.dryRun;
+  if (claimPull) run(bd, ['dolt', 'pull']);
   let targets: Issue[];
   if (options.issues.length > 0) {
     targets = options.issues.flatMap((id) => {
@@ -539,7 +577,9 @@ export function execute(
       // An inherited BEADS_ISSUE is only a hint; a stale or foreign ID is ignored.
       try {
         return [readIssue(bd, id)];
-      } catch {
+      } catch (error) {
+        // Only a confirmed missing issue is ignored; locks and transport errors fail.
+        if (!(error instanceof IssueNotFound)) throw error;
         log(`work-record: ignoring inherited BEADS_ISSUE ${id}; it was not found here`);
         return [];
       }
@@ -586,6 +626,47 @@ export function execute(
     return options.hook ? 0 : 1;
   }
   refuseRejected();
+  if (options.pull && !options.dryRun && !claimPull) {
+    // Pull only when a record will be written, then re-read each target from the
+    // latest shared history so the write starts from current metadata.
+    run(bd, ['dolt', 'pull']);
+    const explicit = new Set(options.issuesFromEnv ? [] : options.issues);
+    const fresh: Issue[] = [];
+    for (const { id } of targets) {
+      let issue: Issue;
+      try {
+        issue = readIssue(bd, id);
+      } catch (error) {
+        // A claim or an explicitly named issue must exist; an issue found
+        // implicitly that disappeared upstream (deleted) is simply not refreshed.
+        if (options.event === 'claim' || explicit.has(id) || !(error instanceof IssueNotFound)) {
+          throw error;
+        }
+        log(`work-record: ${id} is no longer readable after pulling; not refreshed`);
+        continue;
+      }
+      if (options.event === 'claim') {
+        fresh.push(issue);
+        continue;
+      }
+      const held = holdsRecord(current, storedRecord(issue.metadata));
+      // Implicitly found issues must still be in progress after the pull.
+      const active = explicit.has(id) || issue.status === 'in_progress';
+      if (held && active) fresh.push(issue);
+      else if (explicit.has(id)) {
+        throw new Error(
+          `${id} not held by this session after pulling; run claim --issue to take it over`,
+        );
+      } else {
+        log(`work-record: ${id} changed upstream (closed or taken over); not refreshed`);
+      }
+    }
+    targets = fresh;
+    if (targets.length === 0) {
+      log('work-record: nothing left to record after pulling the latest history');
+      return options.hook ? 0 : 1;
+    }
+  }
   for (const issue of targets) {
     const previous = storedRecord(issue.metadata);
     const plan = planUpdate(current, previous);
