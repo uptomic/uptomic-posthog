@@ -67,7 +67,14 @@ data because the inherited deployment predates the current candidate by several 
 
 ## Production
 
-1. Enter the maintenance window and create named pre-upgrade backups.
+1. Enter the maintenance window and create named pre-upgrade backups. Railway allows 10 backups
+   per volume and counts scheduled backups toward that limit. The daily, weekly and monthly
+   schedules alone hold about 13, so a manual backup is refused while the volume is at the limit.
+   Before the window, list each volume's backups (`volumeInstanceBackupList`) and delete the
+   oldest scheduled backups (`volumeInstanceBackupDelete`, one at a time) until there are at
+   most 9. Keep the newest daily backup and the previous promotion's manual backup until this
+   one is created. After this promotion is accepted, delete the previous promotion's manual
+   backup, because manual backups never expire.
 2. Record the active writer deployment IDs, explicitly remove those active deployments, and verify
    that no writer deployment remains running before taking the final logical metadata dump. Do not
    treat `region=0` scaling as a pause: Railway removes that region configuration and can fall back
@@ -93,7 +100,11 @@ data because the inherited deployment predates the current candidate by several 
    [private dependency path](private-networking.md). A public `/_livez` 200 is not private-connectivity
    proof; PersonHog gRPC and its IPv4-only metrics/readiness listeners are separate checks.
 9. Verify public health, event capture, query results, feature flags, replay, authenticated PostHog,
-   MCP, and Pulse's governed PostHog aggregate before leaving the window.
+   MCP, and Pulse's governed PostHog aggregate before leaving the window. For Pulse, run the
+   released Pulse sync-worker PostHog client itself, read-only with its production `/pulse/sync-worker`
+   variables, for the previous report date: the daily aggregate, inactivity churn and one navigation
+   batch must all decode. A different query, tool or endpoint on the same server is not proof; on
+   2026-11-08 `query-trends` passed while the `execute-sql` output Pulse decodes had changed.
    Canary storage counts must use `refresh=force_blocking` and report `is_cached=false`;
    repeating a cached zero does not prove ingestion failure. Check replay metadata and the
    actual recording blob separately, and never resend a canary merely to escape a stale query.
