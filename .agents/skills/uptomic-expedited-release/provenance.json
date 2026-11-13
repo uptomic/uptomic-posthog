@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/uptomic/uptomic-hq",
+  "commit": "d7f4d49cd806f3d8dd844aa252a1a40ce237d80a",
+  "buildDigest": "35cd1e25f70a53fca86f667292d3eb47300ee00048f0b27b92fc76656b61f260",
+  "source": "skills/uptomic-expedited-release",
+  "files": {
+    "SKILL.md": "a5c8cdc15ad2bacc77644aa178a975797d9faf3c06841cdff30c46b147cd72a6",
+    "agents/openai.yaml": "fd1bd96035e89bbfcdaed2116aab614fd481d3e92d741e89c6cab4ec9ab9f89e",
+    "references/projects.md": "5dcb4d7ae35a14946efc1ed939cca76347edab1e68de88f55e75e8392f06b37c",
+    "references/repositories.json": "7c6f43be6abcc829838ba43e84109409f9d1b6441b50320983683a2a03084678"
+  },
+  "updates": "Change and review the HQ source, then explicitly refresh this snapshot. Credentials are never included."
+}

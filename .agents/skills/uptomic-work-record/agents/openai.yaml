@@ -1,0 +1,6 @@
+interface:
+  display_name: "Uptomic Work Record"
+  short_description: "Record who works on a Beads issue, where and on which code"
+  default_prompt: "Use $uptomic-work-record to write or refresh the structured work record on the claimed Beads issue."
+policy:
+  allow_implicit_invocation: true
