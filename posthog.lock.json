@@ -1,16 +1,16 @@
 {
   "candidateImages": {
-    "mcp": "ghcr.io/uptomic/posthog-railway/mcp:sha-c33e840e1ba8"
+    "mcp": "ghcr.io/uptomic/posthog-railway/mcp:sha-5e62671c82cf"
   },
   "supportingImages": {
     "gateway": "docker.io/library/caddy@sha256:5f5c8640aae01df9654968d946d8f1a56c497f1dd5c5cda4cf95ab7c14d58648"
   },
   "officialImages": {
     "main": {
-      "createdAt": "2026-11-21T02:21:08.055566166Z",
-      "digest": "sha256:2f103ed19ab4444092849029c753ac385387572374e8edb7978bcaee3321dd45",
-      "image": "ghcr.io/posthog/posthog@sha256:2f103ed19ab4444092849029c753ac385387572374e8edb7978bcaee3321dd45",
-      "revision": "c33e840e1ba8fc9a5a50b4fcf63a538399aea233",
+      "createdAt": "2026-11-22T01:38:06.443947885Z",
+      "digest": "sha256:a6d77efb9ed29bee0cda54f113272990aa839bc858ac8dc6b9f9d31b715238b1",
+      "image": "ghcr.io/posthog/posthog@sha256:a6d77efb9ed29bee0cda54f113272990aa839bc858ac8dc6b9f9d31b715238b1",
+      "revision": "5e62671c82cf4ea21c6fa9a30058c20cfed5aece",
       "source": "https://github.com/PostHog/posthog"
     },
     "capture": {
@@ -49,10 +49,10 @@
       "source": "https://github.com/PostHog/posthog"
     },
     "node": {
-      "createdAt": "2026-11-20T22:19:51.55525145Z",
-      "digest": "sha256:b439feafd53e9906512aed2c0d0a740f3edc5aeb8c36d904f664e3b45fedaf85",
-      "image": "ghcr.io/posthog/posthog-node@sha256:b439feafd53e9906512aed2c0d0a740f3edc5aeb8c36d904f664e3b45fedaf85",
-      "revision": "8e8d0b577cd298a9daaf35feef5b1e0d4ab05c14",
+      "createdAt": "2026-11-21T17:11:52.443829269Z",
+      "digest": "sha256:f7a3f6c6c990258cd2f12579255767ff8b84e62150d1334973b239b9e151dc8d",
+      "image": "ghcr.io/posthog/posthog-node@sha256:f7a3f6c6c990258cd2f12579255767ff8b84e62150d1334973b239b9e151dc8d",
+      "revision": "8a3fded44aae586cee57f15199f2b86ed426f683",
       "source": "https://github.com/PostHog/posthog"
     },
     "personhog-replica": {
@@ -100,8 +100,8 @@
       "source": "https://github.com/PostHog/posthog"
     }
   },
-  "resolvedAt": "2026-11-21T02:24:50.258Z",
+  "resolvedAt": "2026-11-22T02:25:51.124Z",
   "schemaVersion": 1,
-  "upstreamCommit": "c33e840e1ba8fc9a5a50b4fcf63a538399aea233",
+  "upstreamCommit": "5e62671c82cf4ea21c6fa9a30058c20cfed5aece",
   "upstreamRepository": "PostHog/posthog"
 }
