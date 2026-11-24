@@ -1,86 +1,86 @@
 {
   "candidateImages": {
-    "mcp": "ghcr.io/uptomic/posthog-railway/mcp:sha-6262e9acb6c9"
+    "mcp": "ghcr.io/uptomic/posthog-railway/mcp:sha-99dff4ebdf3a"
   },
   "supportingImages": {
     "gateway": "docker.io/library/caddy@sha256:5f5c8640aae01df9654968d946d8f1a56c497f1dd5c5cda4cf95ab7c14d58648"
   },
   "officialImages": {
     "main": {
-      "createdAt": "2026-11-23T01:35:06.523509255Z",
-      "digest": "sha256:d59e8b59e8d422ba44628fb2a857dbb4f3306a913c04194a87a212003fbea302",
-      "image": "ghcr.io/posthog/posthog@sha256:d59e8b59e8d422ba44628fb2a857dbb4f3306a913c04194a87a212003fbea302",
-      "revision": "08ea5803ec5e1ef5c7789e9fd094c2c4c52f5d42",
+      "createdAt": "2026-11-24T02:08:35.772772723Z",
+      "digest": "sha256:2150d582e06056c9dc3c342a71c103c4a7b83f5b42170903d391d3ebe3cf5987",
+      "image": "ghcr.io/posthog/posthog@sha256:2150d582e06056c9dc3c342a71c103c4a7b83f5b42170903d391d3ebe3cf5987",
+      "revision": "c845e2ba501d5dcc032c83a0cd57ba7aaf136c1d",
       "source": "https://github.com/PostHog/posthog"
     },
     "capture": {
-      "createdAt": "2026-11-20T22:11:06.633435808Z",
-      "digest": "sha256:dd9f26755437070e12a6b2507a325a5de79865a6caf45a168ec9360459b1fb09",
-      "image": "ghcr.io/posthog/posthog/capture@sha256:dd9f26755437070e12a6b2507a325a5de79865a6caf45a168ec9360459b1fb09",
-      "revision": "2982ba14e140d9f3b924e734989f377ba59a0620",
+      "createdAt": "2026-11-20T22:11:17.356377588Z",
+      "digest": "sha256:3ee923633b5d8936bb8119ddb3c07f00628c02b3e7cb1316c17c847b5b9655ca",
+      "image": "ghcr.io/posthog/posthog/capture@sha256:3ee923633b5d8936bb8119ddb3c07f00628c02b3e7cb1316c17c847b5b9655ca",
+      "revision": "de8fe06d8228e776fbf326e7d54f4736f0fc5f93",
       "source": "https://github.com/PostHog/posthog"
     },
     "cymbal": {
       "createdAt": "2026-11-20T04:59:03.632103371Z",
-      "digest": "sha256:6a0dc6263b97c8f694d2c6d2a6bbe7383f84739a1d8a27d83aa442b9b0a967af",
-      "image": "ghcr.io/posthog/posthog/cymbal@sha256:6a0dc6263b97c8f694d2c6d2a6bbe7383f84739a1d8a27d83aa442b9b0a967af",
-      "revision": "0daa3b4ce12255d7291f4dd1bf9f78fc6c70a7f0",
+      "digest": "sha256:73cf43a1584b3cb078cb9ee691843163529cd078c79a1bf346d0f027c92f0d2d",
+      "image": "ghcr.io/posthog/posthog/cymbal@sha256:73cf43a1584b3cb078cb9ee691843163529cd078c79a1bf346d0f027c92f0d2d",
+      "revision": "de8fe06d8228e776fbf326e7d54f4736f0fc5f93",
       "source": "https://github.com/PostHog/posthog"
     },
     "feature-flags": {
-      "createdAt": "2026-11-20T19:07:27.318430561Z",
-      "digest": "sha256:12590dded01aa6fffd6cab5fa6a2634ccaa6de1542ea4ac776c973828c0c4535",
-      "image": "ghcr.io/posthog/posthog/feature-flags@sha256:12590dded01aa6fffd6cab5fa6a2634ccaa6de1542ea4ac776c973828c0c4535",
-      "revision": "253050664976cac475a1046e087469d0aadab2d2",
+      "createdAt": "2026-11-23T19:02:55.842834453Z",
+      "digest": "sha256:59352a1f85d395799f947dccb65c11b45f4f39f16bc4c17faabb21abbd9af6c4",
+      "image": "ghcr.io/posthog/posthog/feature-flags@sha256:59352a1f85d395799f947dccb65c11b45f4f39f16bc4c17faabb21abbd9af6c4",
+      "revision": "de8fe06d8228e776fbf326e7d54f4736f0fc5f93",
       "source": "https://github.com/PostHog/posthog"
     },
     "hypercache-server": {
       "createdAt": "2026-11-20T00:06:06.875120544Z",
-      "digest": "sha256:5f1cf445da6e317138d051253d3289673e10eff4be3785cc8bbb8f2a09bdb6a4",
-      "image": "ghcr.io/posthog/posthog/hypercache-server@sha256:5f1cf445da6e317138d051253d3289673e10eff4be3785cc8bbb8f2a09bdb6a4",
-      "revision": "f75304950cc26f12f09283a36f0faf7c5b3bfda6",
+      "digest": "sha256:cdcbd1134dad2a13c1c12c6d560d9d21fcc4cdec29a32e4ee37ee4f75893fd3e",
+      "image": "ghcr.io/posthog/posthog/hypercache-server@sha256:cdcbd1134dad2a13c1c12c6d560d9d21fcc4cdec29a32e4ee37ee4f75893fd3e",
+      "revision": "de8fe06d8228e776fbf326e7d54f4736f0fc5f93",
       "source": "https://github.com/PostHog/posthog"
     },
     "livestream": {
-      "createdAt": "2026-11-10T21:31:37.472886769Z",
-      "digest": "sha256:9be2f074b41eb7b2e403ed1681677663ebb54503b2c410a5f0f4c69ffb81d35d",
-      "image": "ghcr.io/posthog/posthog/livestream@sha256:9be2f074b41eb7b2e403ed1681677663ebb54503b2c410a5f0f4c69ffb81d35d",
-      "revision": "5f3ddee5e99fb1ea258e617bf461e01ec28fb813",
+      "createdAt": "2026-11-23T08:27:22.617377943Z",
+      "digest": "sha256:fe87351d84aaa443994ed00a0c15aaf2627b9640a9c90bd2f9f4883e11869f39",
+      "image": "ghcr.io/posthog/posthog/livestream@sha256:fe87351d84aaa443994ed00a0c15aaf2627b9640a9c90bd2f9f4883e11869f39",
+      "revision": "de8fe06d8228e776fbf326e7d54f4736f0fc5f93",
       "source": "https://github.com/PostHog/posthog"
     },
     "node": {
-      "createdAt": "2026-11-22T23:21:09.62915846Z",
-      "digest": "sha256:f0aab189e83cde9b2e69cd522bfa74701b8f3312a3d45bee0bccec009cd789e1",
-      "image": "ghcr.io/posthog/posthog-node@sha256:f0aab189e83cde9b2e69cd522bfa74701b8f3312a3d45bee0bccec009cd789e1",
-      "revision": "07b327219000672280cfab3a8484573b9a399d05",
+      "createdAt": "2026-11-24T00:32:15.594887681Z",
+      "digest": "sha256:595825a6792dddaa72cf47f3776dd2749d8e38ec65a77f751c9cb89ccf195b5b",
+      "image": "ghcr.io/posthog/posthog-node@sha256:595825a6792dddaa72cf47f3776dd2749d8e38ec65a77f751c9cb89ccf195b5b",
+      "revision": "844d5e93e63678be45c8ec60cbb67779e0b43434",
       "source": "https://github.com/PostHog/posthog"
     },
     "personhog-replica": {
-      "createdAt": "2026-11-20T08:21:08.57359111Z",
-      "digest": "sha256:2374c5bad11e6bdba02c7ef267df01270d2517c7fd8ebd269636eb51f4b24cd3",
-      "image": "ghcr.io/posthog/posthog/personhog-replica@sha256:2374c5bad11e6bdba02c7ef267df01270d2517c7fd8ebd269636eb51f4b24cd3",
-      "revision": "0daa3b4ce12255d7291f4dd1bf9f78fc6c70a7f0",
+      "createdAt": "2026-11-23T19:01:53.989870553Z",
+      "digest": "sha256:4e021485c277cf2acad1b4d93a332fa6329b980e2cc20cdca56be6790cb0b6ed",
+      "image": "ghcr.io/posthog/posthog/personhog-replica@sha256:4e021485c277cf2acad1b4d93a332fa6329b980e2cc20cdca56be6790cb0b6ed",
+      "revision": "de8fe06d8228e776fbf326e7d54f4736f0fc5f93",
       "source": "https://github.com/PostHog/posthog"
     },
     "personhog-router": {
       "createdAt": "2026-11-20T00:05:52.951216026Z",
-      "digest": "sha256:b2b8b8b59d0152af16bff91b47c80a13404dcfed583eaeabbe90a5c315938271",
-      "image": "ghcr.io/posthog/posthog/personhog-router@sha256:b2b8b8b59d0152af16bff91b47c80a13404dcfed583eaeabbe90a5c315938271",
-      "revision": "0daa3b4ce12255d7291f4dd1bf9f78fc6c70a7f0",
+      "digest": "sha256:6386f45b59c5ddc1afa12a8a12b55996312d9bee97ce91647914d208506ef086",
+      "image": "ghcr.io/posthog/posthog/personhog-router@sha256:6386f45b59c5ddc1afa12a8a12b55996312d9bee97ce91647914d208506ef086",
+      "revision": "de8fe06d8228e776fbf326e7d54f4736f0fc5f93",
       "source": "https://github.com/PostHog/posthog"
     },
     "property-defs-rs": {
-      "createdAt": "2026-11-20T08:22:24.39895236Z",
-      "digest": "sha256:38e024dd9e0b17ce2c85852619024e5ea23bfdba1bc9b1c416dc1daf22252c8d",
-      "image": "ghcr.io/posthog/posthog/property-defs-rs@sha256:38e024dd9e0b17ce2c85852619024e5ea23bfdba1bc9b1c416dc1daf22252c8d",
-      "revision": "0daa3b4ce12255d7291f4dd1bf9f78fc6c70a7f0",
+      "createdAt": "2026-11-23T19:03:40.57354024Z",
+      "digest": "sha256:f162ad1ee8a75bded32d20bd1d38112522323f4d376d0c010e91f31dfdc41dad",
+      "image": "ghcr.io/posthog/posthog/property-defs-rs@sha256:f162ad1ee8a75bded32d20bd1d38112522323f4d376d0c010e91f31dfdc41dad",
+      "revision": "de8fe06d8228e776fbf326e7d54f4736f0fc5f93",
       "source": "https://github.com/PostHog/posthog"
     },
     "sqlx-migrate": {
-      "createdAt": "2026-11-19T19:08:29.223373303Z",
-      "digest": "sha256:d17c601f141f56eb69052a017e98f60d5b2cc896d4ae51f0822c49c7812e5c6b",
-      "image": "ghcr.io/posthog/posthog/sqlx-migrate@sha256:d17c601f141f56eb69052a017e98f60d5b2cc896d4ae51f0822c49c7812e5c6b",
-      "revision": "431ab634dcc4e04bba824197dd47bc1634392985",
+      "createdAt": "2026-11-23T17:07:16.068264908Z",
+      "digest": "sha256:a1f4d4c91167c8127ae13d76bc832022c383bd3a1d4b265efa3df32efcc0a425",
+      "image": "ghcr.io/posthog/posthog/sqlx-migrate@sha256:a1f4d4c91167c8127ae13d76bc832022c383bd3a1d4b265efa3df32efcc0a425",
+      "revision": "de8fe06d8228e776fbf326e7d54f4736f0fc5f93",
       "source": "https://github.com/PostHog/posthog"
     }
   },
@@ -100,8 +100,8 @@
       "source": "https://github.com/PostHog/posthog"
     }
   },
-  "resolvedAt": "2026-11-23T02:27:51.906Z",
+  "resolvedAt": "2026-11-24T02:26:26.731Z",
   "schemaVersion": 1,
-  "upstreamCommit": "6262e9acb6c9ffa6d2dcad0a0460fa74830926aa",
+  "upstreamCommit": "99dff4ebdf3a8377037e1c4edc3488ebd0758bf5",
   "upstreamRepository": "PostHog/posthog"
 }
